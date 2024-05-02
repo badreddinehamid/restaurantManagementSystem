@@ -50,14 +50,24 @@ class DBconnector:
             return 1
 
 
+
+    #this method fetch the data from our database and return list of values 
+    def read_query(self, query):
+        cursor = self._connection.cursor()
+        result = None
+        try:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+        except Error as err:
+            print(f"Error: '{err}'")
+
+
+
+
     #tto close the database after the use
     def close_DB(self):
         self._connection.close()
         print("closed succesfully")
 
 
-
-    
-managerConnnector = DBconnector('localhost','restaurantManager',"password","restaurantManangementDB")
-
-managerConnnector.connect_to_db()
